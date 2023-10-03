@@ -1,0 +1,48 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+class A
+{
+    void cal(String arr,String newone)
+    {
+        String []token=arr.split("\\.");
+        
+        int length=token.length;
+        StringBuilder sb=new StringBuilder();
+        System.out.println(length);
+        if(length<2)
+        {
+            System.out.println("확장자명이 없습니다.");
+        }
+        else
+        {
+            if(arr.endsWith(token[length-1]))
+            {
+                token[length-1]=newone;
+            }
+            for(int i=0;i<length;i++)
+            {
+                sb.append(token[i]);
+                if(i!=length-1)
+                    sb.append(".");
+            }
+            arr=sb.toString();
+            System.out.println(arr);
+        }
+
+    }
+
+}
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        A a=new A();
+        Scanner sc=new Scanner(System.in);
+        String arr=sc.next();
+        String newone=sc.next();
+        a.cal(arr,newone);
+
+    }
+}
