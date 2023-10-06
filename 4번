@@ -1,0 +1,66 @@
+import java.util.*;
+
+public class Main
+{
+    public static void main(String[]args)
+    {
+        int []arr=new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13};
+        int a=(int)(Math.random()*13)+1;
+        int b=(int)(Math.random()*13)+1;
+
+        if(a>b)
+        {
+            cal(a);
+            System.out.print(" ");
+            cal(b);
+            System.out.println("\na승");
+        }
+        else if(b>a)
+        {
+            cal(a);
+            System.out.print(" ");
+            cal(b);
+            System.out.println("\nb승");
+        }
+        else
+        {
+            cal(a);
+            System.out.print(" ");
+            cal(b);
+            System.out.println("\n비김");
+        }
+
+    }
+
+    static void cal(int su)
+    {
+        if(su>10 ||su==1)
+        {
+            String arr=changecard(su);
+            System.out.print(arr);
+        }
+        else {
+            System.out.print(su);
+        }
+    }
+    static String changecard(int a)
+    {
+        if(a==1)
+        {
+            return "ace";
+        }
+        else if(a==11)
+        {
+            return "jack";
+        }
+        else if(a==12)
+        {
+            return "queen";
+        }
+        else if(a==13)
+        {
+            return "king";
+        }
+        return null;
+    }
+}
