@@ -1,0 +1,99 @@
+import java.util.Scanner;
+
+
+class Exchangerate
+{
+    double m;//한국의 원화환율
+    String country;//나라
+    String won;//화폐단위
+}
+class ExchangeBank
+{
+    Exchangerate []rate;
+    int count;
+    ExchangeBank()
+    {
+        rate=new Exchangerate[5];
+        int count=0;
+    }
+    void add(String name,double rate,String monetaryUnit)
+    {
+
+        this.rate[count]=new Exchangerate();
+        this.rate[count].m=rate;
+        this.rate[count].country=name;
+        this.rate[count].won=monetaryUnit;
+        count+=1;
+        
+    }
+    double exchange(String from,String to,double amount)
+    {
+        double sum=0;
+        int time=0;
+        for(int i=0;i<5;i++)
+        {
+            if(this.rate[i].country.equals(from))
+            {
+                sum+=this.rate[i].m*amount;
+                time=1;
+                break;
+            }
+        }
+        if(time==0)
+        {
+            return 0.0;
+        }
+        time=1;
+        for(int i=0;i<5;i++)
+        {
+            if(this.rate[i].country.equals(to))
+            {
+                sum/=this.rate[i].m;
+            }
+        }
+        if(time==0)
+        {
+            return 0.0;
+        }
+        return sum;
+
+
+    }
+    Exchangerate findExchangeRate(String name)
+    {
+        for(int i=0;i<5;i++)
+        {
+            if(this.rate[i].country.equals(name))
+            {
+                return rate[i];
+            }
+        }
+        return null;
+    }
+}
+
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        ExchangeBank B=new ExchangeBank();
+        B.add("미국",1438.5,"달러");
+        B.add("중국",197.82,"위안");
+        B.add("영국",1628.24,"파운드");
+        B.add("유로",1414.62,"유로");
+        B.add("스위스",1439.08,"프랑");
+        System.out.printf("%.2f\n",B.exchange("미국","영국",100));
+        Scanner sc=new Scanner(System.in);
+        String from;
+        String to;
+        double amount;
+        System.out.print("환전할 통화국가");
+        from=sc.next();
+        System.out.print("환전대상 통화국가");
+        to=sc.next();
+        System.out.print("환전금액");
+        amount=sc.nextDouble();
+        System.out.printf("%.2f",B.exchange(from,to,amount));
+    }
+}
