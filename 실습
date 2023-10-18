@@ -1,0 +1,145 @@
+import java.util.Scanner;
+
+class Student
+{
+    String name;
+    int number;
+    double gpa;
+    Student(String name,int number, double gpa)
+    {
+        this.number=number;
+
+        this.name=name;
+        this.gpa=gpa;
+    }
+    String getName()
+    {
+        return name;
+    }
+    int getNumber()
+    {
+        return number;
+    }
+    double getGPA()
+    {
+        return gpa;
+    }
+    public String toString()
+    {
+        String arr="";
+        arr+="Name: ";
+        arr+=name+", ";
+        arr+="Number: ";
+        arr+=number+", ";
+        arr+="GPA: ";
+        arr+=gpa;
+        return arr;
+    }
+}
+
+class StudentDB
+{
+    Student[] students;
+    int count=0;
+
+    StudentDB()
+    {
+        students=new Student[3];
+    }
+    void add(Student student)
+    {
+        students[count]=student;
+        count+=1;
+    }
+    void add(String name,int number,double gpa)
+    {
+        students[count]=new Student(name,number,gpa);
+        count+=1;
+    }
+    Student findBy(String name)
+    {
+        for(int i=0;i<students.length;i++)
+        {
+            if(students[i].name.equals(name))
+            {
+                return students[i];
+            }
+        }
+        return null;
+    }
+    Student findBy(int number)
+    {
+        for(int i=0;i<students.length;i++)
+        {
+            if(students[i].number==number)
+            {
+                return students[i];
+            }
+        }
+        return null;
+    }
+    Student findBy(int param,double gpa)
+    {
+        if(param==0)
+        {
+            for(int i=0;i<students.length;i++)
+            {
+                if(students[i].gpa<gpa)
+                {
+                    return students[i];
+                }
+            }
+        }
+        else {
+            for(int i=0;i<students.length;i++)
+            {
+                if(students[i].gpa>gpa)
+                {
+                    return students[i];
+                }
+            }
+        }
+
+        return null;
+    }
+    Student findBy(double gpa)
+    {
+        for(int i=0;i<students.length;i++)
+        {
+            if(students[i].gpa==gpa)
+            {
+                return students[i];
+            }
+        }
+        return null;
+    }
+}
+
+
+public class Main
+{
+    static final int LOWER_THAN=0;
+    static final int HIGHER_THAN=1;
+    public static void main(String[]args)
+    {
+
+        StudentDB db=new StudentDB();
+        Student s=new Student("김지우",201911111,4.01);
+        db.add(s);
+        db.add("이민준",201922222,3.85);
+        db.add("박서윤",201933333,3.90);
+        Student a;
+        a=db.findBy("김지우");
+        System.out.println(a.toString());
+        a=db.findBy(201922222);
+        System.out.println(a.toString());
+        a=db.findBy(3.90);
+        System.out.println(a.toString());
+        a=db.findBy(LOWER_THAN,3.95);
+        System.out.println(a.toString());
+        a=db.findBy(HIGHER_THAN,3.95);
+        System.out.println(a.toString());
+
+
+    }
+}
