@@ -1,0 +1,120 @@
+import java.awt.Point;
+class Shape
+{
+    public double getArea()
+    {
+        return 0.0;
+    }
+    public double getPerimeter()
+    {
+        return 0.0;
+    }
+    public String toString()
+    {
+        return "shape";
+    }
+}
+
+class Circle extends Shape
+{
+    private Point center;
+    int radius;
+    public Circle(Point p,int r)
+    {
+        this.center=p;
+        this.radius=r;
+    }
+    public Circle(int x,int y,int r )
+    {
+        this.center=new Point(x,y);
+        this.radius=r;
+    }
+    public double getPerimeter()
+    {
+        double sum=0;
+        sum+=Math.PI*Math.pow(radius,2);
+        return sum;
+    }
+    public double getArea()
+    {
+        return Math.PI*2*radius;
+
+    }
+    public String toString()
+    {
+        String arr="";
+        arr+="Circle: \n";
+        arr+="Center: "+ "("+(int)center.getX()+","+(int)center.getY()+")"+"\n";
+        arr+="radius: ";
+        arr+=radius+"\n";
+        arr+="면적: "+getArea()+"\n";
+        arr+="둘레 :"+getArea();
+        return arr;
+
+    }
+}
+class Rectangle extends Shape
+{
+    private Point p1;
+    private Point p2;
+
+    public Rectangle(Point p1,Point p2)
+    {
+        this.p1=p1;
+        this.p2=p2;
+    }
+    public Rectangle(int x1,int y1,int x2,int y2)
+    {
+        p1=new Point(x1,y1);
+        p2=new Point(x2,y2);
+    }
+    public double getArea()
+    {
+        double sum=0;
+        sum=Math.abs((p1.getX()-p2.getX())*(p1.getY()-p2.getY()));
+        return sum;
+    }
+    public double getPerimeter()
+    {
+        return Math.abs((p1.getX()-p2.getX()*2+(p1.getY()-p2.getY())*2));
+    }
+    public String toString()
+    {
+        String arr="";
+        arr+="Rectangle:\n";
+        arr+="p1: ";
+        arr+="("+(int)p1.getX()+","+(int)p1.getY()+")"+"\n";
+        arr+= arr+="p2: ";
+        arr+="("+(int)p2.getX()+","+(int)p2.getY()+")"+"\n";
+        arr+="면적: ";
+        arr+=getArea()+"\n";
+        arr+="둘레: ";
+        arr+=getPerimeter();
+
+        return arr;
+
+    }
+
+}
+
+
+
+public class Main
+{
+    private static final int NUM=4;
+    public static void main(String[] args)
+    {
+        Shape[] shapes = new Shape[NUM];
+        shapes[0] = new Rectangle(20, 30, 50, 50);
+        shapes[1] = new Circle(30, 30, 20);
+        shapes[2] = new Rectangle(new Point(20, 30),new Point(50, 50));
+        shapes[3] = new Circle(new Point(30, 30), 20);
+        for (int i = 0; i < NUM; i++) {
+            System.out.println(shapes[i]);
+            System.out.printf("면적: %.2f\n",shapes[i].getArea());
+            System.out.printf("둘레: %.2f\n", shapes[i].getPerimeter());
+        }
+    }
+
+
+}
